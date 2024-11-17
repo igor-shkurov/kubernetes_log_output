@@ -11,13 +11,15 @@
 1) Build an executable jar by running: <br/>
 ```mvn clean compile assembly:single```
 2) Create a docker image: <br/>
-```docker build -t log-output```
-3) Create a Kubernetes deployment using the created image: <br/>
+```docker build -t log-output .```
+3) Create a kubernetes cluster: <br/>
+```k3d cluster create```
+4) Import a locally stored image to kubernetes: <br/>
+```k3d image import log-output```
+5) Create a Kubernetes deployment using the created image: <br/>
 ```kubectl apply -f manifests/deployment.yaml```
-4) See the logs to make sure pods are up and running: <br/>
+6) See the logs to make sure pods are up and running: <br/>
 ```kubectl logs -f <name of the pod>```
 ### Useful Kubernetes commands:
 1) ```kubectl get pods/deployments```
 2) ```kubectl edit deployment <deployment name>```
-3) ```k3d image import <image name>```
-4) ```k3d cluster create```
